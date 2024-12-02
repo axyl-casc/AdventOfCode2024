@@ -1,0 +1,13 @@
+(define (read-file file-path)
+  (let ((in-port (open-input-file file-path)))  ; Open the file
+    (let loop ((lines '()))
+      (let ((line (read-line in-port 'any)))
+        (if (eof-object? line)
+            (begin
+              (close-input-port in-port)  ; Close the file when done
+              (reverse lines))           ; Return the lines
+            (loop (cons line lines))))))) ; Accumulate lines
+
+;; Usage example
+(define file-contents (read-file "example.txt"))
+(display file-contents)
